@@ -1,0 +1,589 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+
+
+.navbar{
+    padding: 16px 0;
+    background-color: transparent;
+    border-bottom: none;
+    transition: all 0.5s ease-in-out;
+}
+
+.navbar-inverse .navbar-nav>li>a {
+    color: white;
+    font-weight: bold;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.5s ease-in;
+}
+
+.navbar-inverse .navbar-nav>li>a:hover{
+    color: deepskyblue;
+}
+
+.navbar-toggle{
+    background-color: transparent;
+    border: 1px solid white !important;
+    transition: all 0.5s ease-in;
+}
+
+.navbar-toggle:hover{
+  background-color: deepskyblue !important;
+}
+
+.navbar-inverse .navbar-collapse{
+    border-top: transparent !important;
+}
+
+.location{
+    border: 1px solid white;
+    border-radius: 50px;
+}
+
+.location:hover{
+     border: 1px solid deepskyblue;
+    border-radius: 50px;
+    transition: all 0.5s ease-in;
+}
+
+.secondary{
+    background-color: #34495e;
+}
+
+/******************************************
+          Herder section
+******************************************/
+.slider{
+    width: 100%;
+    height: 600px;
+    background-image: url(../img/slider.jpg);
+    background-size: cover;
+    background-position: center;
+    color: white;
+}
+
+.slider-overlay{
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.65);
+    position: relative;
+}
+
+.slider-content{
+    position: absolute;
+    top: 39%;
+    width: 100%;
+}
+
+.icons .fa{
+    font-size: 45px;
+    margin-right: 7px;    
+}
+
+/******************************************
+          call to action buttons
+******************************************/
+
+.cta-div{
+    margin-top: 30px;
+     margin-bottom: 30px
+}
+
+.cta{
+     padding: 13px 30px;
+     background-color: transparent;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 13px;
+    border: 2px solid white;
+    transition: all 0.5s ease-in;
+   
+}
+
+.btn1{
+    border-top-left-radius: 15px; 
+    margin-right: -6px
+}
+
+.btn2{
+    border-bottom-right-radius: 15px;
+    margin-right: 10px
+}
+
+.btn1:hover{
+    text-decoration: none;
+    color: white;
+    background-color: #34495e;
+    border-color: #34495e;
+}
+
+.btn2:hover{
+    text-decoration: none;
+    color: white;
+    background-color: orangered;
+    border-color: orangered
+        
+}
+
+/******************************************
+          Socila links section
+******************************************/
+
+.social-links a.fa{
+    border: 1px solid white;
+    padding: 10px;
+    color: white;
+    height: 35px;
+    width: 35px;
+    border-radius: 50%;
+    margin-right: 2px;
+    transition: all 0.5s ease-in;
+}
+
+.social-links a.fa:hover{
+    text-decoration: none;
+    background-color: deepskyblue;
+    border: 1px solid deepskyblue;
+}
+
+.slider .text, .slider .typed-cursor.typed-cursor--blink{
+    display: inline;
+    font-size: 50px;
+    text-transform: uppercase;
+}
+
+.primary{
+    color: orangered;
+}
+
+.typed-cursor{
+    opacity: 1;
+    animation: blink 0.7s infinite;
+    -webkit-animation: blink 0.7s infinite;
+    -moz-animation: blink 0.7s infinite;
+}
+
+
+/******************************************
+          Service Section
+******************************************/
+
+.service-wrap{
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    overflow: hidden;
+    padding: 25px 35px;
+    position: relative;
+    transition: all 0.5s ease 0s;
+    margin-bottom: 20px;
+}
+
+.service-wrap::before, .service-wrap::after{
+    content: "";
+    height: 300%;
+    position: absolute;
+    transform: rotate(45deg);
+    width: 120%;
+    z-index: -9;
+    transition: all 0.5s;
+    opacity: 0s;
+    background: #34495e;
+}
+
+.service-wrap::before{
+    top: -37px;
+    left: 100%;
+}
+
+.service-wrap:hover:before{
+    left: -27px;
+    opacity: 1;
+}
+
+.service-wrap::after{
+    right: 100%;
+    bottom: -37px;
+}
+
+.service-wrap:hover:after{
+    right: -27px;
+    opacity: 1;
+}
+
+.service-wrap:hover{
+    color: white;
+}
+
+.service-wrap:h3{
+    color: white;
+}
+
+.service-wrap:hover h3{
+    color: white;
+}
+
+.service-wrap:hover h3:after{
+    background-color: white;
+}
+
+.service-icon i{
+    font-size: 30px;
+    margin-bottom: 20px;
+    transition: all 0.5s;
+}
+
+.service-wrap:hover .service-icon i{
+    transform: rotate(360deg);
+}
+
+.service-wrap h3{
+    font-size: 25px;
+    font-weight: 700;
+    padding-bottom: 15px;
+    position: relative;
+}
+
+.service-wrap p{
+    font-size: 14px;
+    margin-bottom: 0;
+}
+/******************************************
+          Works section
+******************************************/
+.work{
+    margin-top: 25px;
+}
+
+.row.no-gutters [class*=col-]{
+    padding-left: 0;
+    padding-right: 0
+}
+
+.img-wrapper{
+    overflow: hidden
+}
+.img-wrapper img{
+    transition: transform 0.5s;
+    width: 100%;
+}
+.img-wrapper img:hover{
+    transform: scale(1.5);
+    cursor: zoom-in;
+}
+
+/******************************************
+          Team Member styles
+******************************************/
+#teams{
+    margin-top: 30px;
+}
+
+.team-member{
+    margin: 0 25px;
+}
+
+.team-member-info{
+    padding: 10px 0 10px 0;
+}
+
+
+h4.team-member-name{
+    font-size: 19px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    padding-top: 2px;
+}
+
+h4.team-member-designation{
+    color: #34c6d3;
+    font-size: 15px;
+    font-weight: 700;
+    text-transform: capitalize;
+}
+
+.social-icon-list{
+    padding-left: 0;
+}
+
+.social-icon-list li{
+    list-style: none;
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    margin-right: 6px;
+    margin-top: 10px;
+}
+
+
+.social-icon-list i{
+    font-size: 17px;
+    
+}
+
+.social-icon-list .icon-gray i{
+    color: #64707b;
+}
+
+/******************************************
+          Revies Section
+******************************************/
+.carousel-inner img{
+    width: 150px;
+    height: 150px;
+    border-radius: 100%;
+    border: 3px solid white;
+    padding: 5px;
+}
+
+.testimonials{
+    background-image: url('../img/reviews.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    color: white;
+    padding-top: 80px;
+    padding-bottom: 100px;
+}
+
+.testimonials .carousel-indicators{
+    bottom: -60px;
+}
+
+.border-bottom{
+    width: 60px;
+    height: 2px;
+    background-color: white;
+    margin: 0 auto;
+}
+
+.carousel-inner p{
+    font-size: 17px;
+    font-weight: normal;
+    letter-spacing: 1px;
+}
+
+/******************************************
+          Blog Style Section
+******************************************/
+.latest-news-area{
+    margin-top: 30px;
+}
+
+.latest-news-wrap{
+    box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.5s;
+}
+
+.news-img{
+    position: relative;
+    
+}
+.news-img img{
+    height: 220px;
+    width: 100%;
+}
+
+/* .news-img::before{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    content: "";
+    opacity: 0;
+    transform: scale(.8);
+    transition: all 0.5s;
+} */
+
+.latest-news-wrap:hover{
+    transform: scale(1);
+    box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.5);
+}
+
+.deat{
+    background: #f89406 none repeat scroll 0 0;
+    height: 70px;
+    left: -1;
+    position: absolute;
+    text-align: center;
+    top: 0;
+    width: 70px;
+    padding: 10px;
+}
+
+.deat span{
+    display: block;
+    color: white;
+    font-weight: 700;
+    font-size: 16px;
+}
+
+.news-content{
+    padding: 20px;
+    margin-left: -20px;
+}
+
+.news-content i{
+    font-size: 18px;
+    display: inline-block;
+}
+.news-content .fa{
+    padding: 10px 10px;
+    cursor: pointer;
+}
+
+.news-content .fa-facebook{
+    color: #3b5998;
+}
+
+.news-content .fa-twitter{
+    color: #0084b4
+}
+
+.news-content .fa-whatsapp{
+    color: #34af23;
+}
+
+.news-content p{
+    margin-bottom: 5px;
+    text-align: justify;
+    padding: 10px;
+}
+
+.news-content a{
+    font-size: 14px;
+    background-color: #34495e;
+    padding: 10px 20px;
+    color: white;
+}
+
+.news-content a:hover{
+    font-size: 14px;
+    border: 1px solid #34495e;
+    border-top-right-radius: 20px;
+    background-color: transparent;
+    color: #34495e;
+    text-decoration: none;
+    transition: .5s ease-in-out;
+}
+
+/******************************************
+          Contact Us section
+******************************************/
+.contact-area{
+    margin-top: 40px;
+
+}
+.form-control{
+    border-radius: 0px;
+    border: 1px solid #34495e;
+}
+
+.section-heading .border-bottom{
+    width: 80px;
+    height: 2px;
+    background-color: black;
+}
+
+.contact-form button.btn{
+    font-size: 1.8rem;
+    font-weight: 700;
+    padding: 12px 43px;
+    border: 1px solid black;
+    border-radius: 0px;
+}
+
+.contact-info{
+ float: left;
+ margin-top: 90px;
+ margin-bottom: -30px;
+ width: 100%;
+ background: darkcyan;
+ padding-top: 35px;
+ padding-bottom: 35px;
+}
+
+.contact-info .fa{
+    font-size: 30px;
+    color: white;
+    border: 1px solid white;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    line-height: 50px;
+}
+
+.contact-info .contact-details{
+    color: white;
+    margin-top: 15px;
+}
+
+.head-section{
+    width: 100%;
+    height: 300px;
+    background-image: url(../img/header.jpg);
+    background-size: cover;
+    background-position: center;
+    color: white;
+}
+
+.contact-head-overlay{
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+.contact-head-overlay h1{
+    position: absolute;
+    top: 50%;
+    left: 35%;
+    text-transform: uppercase;
+}
+
+/******************************************
+          Animation keyframes
+******************************************/
+
+@keyframes blink{
+    0%{
+        opacity: 1;
+    }
+    
+    50%{
+        opacity: 0;
+    }
+    
+   100%{
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes blink{
+    0%{
+        opacity: 1;
+    }
+    
+    50%{
+        opacity: 0;
+    }
+    
+   100%{
+        opacity: 1;
+    }
+}
+
+@-moz-keyframes blink{
+    0%{
+        opacity: 1;
+    }
+    
+    50%{
+        opacity: 0;
+    }
+    
+   100%{
+        opacity: 1;
+    }
+}
