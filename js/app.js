@@ -11,24 +11,12 @@ jQuery(document).ready(function(){
 //Text animation section
     
     let typed = new Typed('.text', {
-        strings:["<strong>I love</strong> <strong class='primary'>coding.</strong>","<strong>and to</strong> <strong class='primary'>share !!!</strong>"],
+        strings:["<strong>Welcome to</strong> <strong class='primary'>Mandiora Blog.</strong>","<strong>We love to</strong> <strong class='primary'>share our thought!!!</strong>"],
         typeSpeed: 50,
         loop:true
     });
     
-    
-    //Scroll section
-    
-    $(window).scroll(function(){
-        let top = $(window).scrollTop();
-        if(top>= 60){
-            $("nav").addClass('secondary')
-        }else if($("nav").hasClass('secondary')){
-            $('nav').removeClass('secondary')
-        }
-    })
-    
-    
+     
     // popup section
     
     $('.work').magnificPopup({
@@ -39,7 +27,24 @@ jQuery(document).ready(function(){
     type: 'image'
       
 });
-
+$('#categories').owlCarousel({
+    items:5,
+    autoplay:true,
+    smartSpeed:700,
+    loop:true,
+    autoplayHoverPause:true,
+    responsive:{
+        0:{
+            items:2
+        },
+        480:{
+            items:5
+        },
+        768:{
+            items:5
+        }
+    }
+})
 
 // owl carousel
 $('#team-members').owlCarousel({
@@ -60,5 +65,7 @@ $('#team-members').owlCarousel({
         }
     }
 })
+
+
     
 });

@@ -59,7 +59,7 @@
 .slider{
     width: 100%;
     height: 600px;
-    background-image: url(../img/slider.jpg);
+    background-image: url(../img/chinoso.jpg);
     background-size: cover;
     background-position: center;
     color: white;
@@ -156,6 +156,12 @@
     text-transform: uppercase;
 }
 
+@media only screen and (max-width: 480px){
+    .slider .text, .slider .typed-cursor.typed-cursor--blink{
+        font-size: 20px;
+    }
+}
+
 .primary{
     color: orangered;
 }
@@ -171,14 +177,18 @@
 /******************************************
           Service Section
 ******************************************/
-
 .service-wrap{
-    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    display: flex;
+    flex-direction: column;
+}
+.service-wrap{
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
     overflow: hidden;
-    padding: 25px 35px;
+    padding: 10px;
     position: relative;
     transition: all 0.5s ease 0s;
-    margin-bottom: 20px;
+    margin: 0 25px;
+    /* border: 1px solid black; */
 }
 
 .service-wrap::before, .service-wrap::after{
@@ -194,7 +204,6 @@
 }
 
 .service-wrap::before{
-    top: -37px;
     left: 100%;
 }
 
@@ -240,7 +249,7 @@
 }
 
 .service-wrap h3{
-    font-size: 25px;
+    font-size: 15px;
     font-weight: 700;
     padding-bottom: 15px;
     position: relative;
@@ -251,28 +260,41 @@
     margin-bottom: 0;
 }
 /******************************************
-          Works section
+          Feature section
 ******************************************/
-.work{
-    margin-top: 25px;
+.cover{
+    display: grid;
+    grid-template-columns: 50% 25% 25%;
+    grid-template-rows:300px 300px;
+    grid-gap: 5px 5px;
+    width: 1400px;
+    margin: 0 auto;
 }
 
-.row.no-gutters [class*=col-]{
-    padding-left: 0;
-    padding-right: 0
+.feature{
+    position: relative;
 }
 
-.img-wrapper{
-    overflow: hidden
-}
-.img-wrapper img{
-    transition: transform 0.5s;
+.feature img{
     width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
-.img-wrapper img:hover{
-    transform: scale(1.5);
-    cursor: zoom-in;
+
+.title__filter{
+    position: absolute;
+    bottom: 0;
+    background-color: #333;
+    opacity: 50%;
+    width: 100%;
+    height: 22%;
 }
+
+.feature__title{
+    
+}
+
+
 
 /******************************************
           Team Member styles
@@ -375,6 +397,7 @@ h4.team-member-designation{
 .latest-news-wrap{
     box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1);
     transition: all 0.5s;
+    margin-bottom: 20px;
 }
 
 .news-img{
@@ -470,77 +493,7 @@ h4.team-member-designation{
     transition: .5s ease-in-out;
 }
 
-/******************************************
-          Contact Us section
-******************************************/
-.contact-area{
-    margin-top: 40px;
 
-}
-.form-control{
-    border-radius: 0px;
-    border: 1px solid #34495e;
-}
-
-.section-heading .border-bottom{
-    width: 80px;
-    height: 2px;
-    background-color: black;
-}
-
-.contact-form button.btn{
-    font-size: 1.8rem;
-    font-weight: 700;
-    padding: 12px 43px;
-    border: 1px solid black;
-    border-radius: 0px;
-}
-
-.contact-info{
- float: left;
- margin-top: 90px;
- margin-bottom: -30px;
- width: 100%;
- background: darkcyan;
- padding-top: 35px;
- padding-bottom: 35px;
-}
-
-.contact-info .fa{
-    font-size: 30px;
-    color: white;
-    border: 1px solid white;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    line-height: 50px;
-}
-
-.contact-info .contact-details{
-    color: white;
-    margin-top: 15px;
-}
-
-.head-section{
-    width: 100%;
-    height: 300px;
-    background-image: url(../img/header.jpg);
-    background-size: cover;
-    background-position: center;
-    color: white;
-}
-
-.contact-head-overlay{
-    position: relative;
-    width: 100%;
-    height: 100%;
-}
-.contact-head-overlay h1{
-    position: absolute;
-    top: 50%;
-    left: 35%;
-    text-transform: uppercase;
-}
 
 /******************************************
           Animation keyframes
