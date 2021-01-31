@@ -1,0 +1,52 @@
+<!-- Header section -->
+<%-include('inc/header.ejs')-%>
+
+    <!-- Navigation section -->
+    <%-include('inc/navbar.ejs')-%>
+
+        <main>
+            <div class="main__container">
+                <div class="main__title">
+                    <img src="../img/admin/hello.svg" alt="">
+                    <div class="main__greeting">
+                        <h1>Hello Madiora</h1>
+                        <p>Welcome to your Posts dashboard</p>
+                    </div>
+                </div><hr>
+
+               <br><br>
+                <div class="panel panel-default p-2">
+                    <h1 class="text-center">All Post Available</h1><br>
+                <table class="table table-hover table-bordered">
+                    <thead>
+                      <tr>
+                        <th>Firstname</th>
+                        <th>Lastname</th>
+                        <th>Email</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>John</td>
+                        <td>Doe</td>
+                        <td>john@example.com</td>
+                      </tr>
+                      <tr>
+                        <td>Mary</td>
+                        <td>Moe</td>
+                        <td>mary@example.com</td>
+                      </tr>
+                      <tr>
+                        <td>July</td>
+                        <td>Dooley</td>
+                        <td>july@example.com</td>
+                      </tr>
+                    </tbody>
+                  </table>
+           </div>
+                </div>
+        </main>
+
+
+        <%-include('inc/sidebar.ejs')-%>
+            <%-include('inc/footer.ejs')-%>

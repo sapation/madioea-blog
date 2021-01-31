@@ -15,17 +15,11 @@ app.use(express.static('public'))
 
 
 // routing the files
-app.get('/', (req, res,next)=>{
-  res.render('index',{
-    title:'Madiora-Home'
-  })
-})
+const frontViews = require('./routes/front-view');
+const adminViews = require('./routes/admin');
+app.use(frontViews);
+app.use('/admin', adminViews);
 
-app.get('/contact',(req, res, next)=>{
-  res.render('contact',{
-    title:'Madiora-Contact'
-  })
-})
 
 // listins section
 app.listen(port, ()=>{

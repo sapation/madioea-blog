@@ -59,7 +59,7 @@ body{
     color: #3b9668;
 }
 
-.container{
+.container__custom{
     display: grid;
     height: 100vh;
     grid-template-columns: 0.8fr 1fr 1fr 1fr;
@@ -69,7 +69,7 @@ body{
         "sidebar main main main";
 }
 
-.navbar{
+.navbar__custom{
     background: white;
     grid-area: nav;
     height: 60px;
@@ -171,11 +171,11 @@ main{
     margin: 20px 0;
 }
 
-.card{
+.card__custom{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: 70px;
+    height: 100px;
     padding: 25px;
     background: #fff;
     box-shadow: 5px 5px 13px #ededed,
@@ -400,7 +400,7 @@ main{
 }
 
 @media only screen and (max-width: 978px){
-    .container{
+    .container__custom{
         grid-template-columns: 1fr;
         grid-template-rows: 0.2fr 3fr;
         grid-template-areas: 
