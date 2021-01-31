@@ -11,7 +11,7 @@ jQuery(document).ready(function(){
 //Text animation section
     
     let typed = new Typed('.text', {
-        strings:["<strong>Welcome to</strong> <strong class='primary'>Mandiora Blog.</strong>","<strong>We love to</strong> <strong class='primary'>share our thought!!!</strong>"],
+        strings:["<strong>Welcome to</strong> <strong class='primary'>Madiora Blog.</strong>","<strong>We love to</strong> <strong class='primary'>share our thought!!!</strong>"],
         typeSpeed: 50,
         loop:true
     });
@@ -66,6 +66,6 @@ $('#team-members').owlCarousel({
     }
 })
 
-
+AOS.init();
     
 });
