@@ -103,6 +103,12 @@
     transition: all 0.5s ease-in;
    
 }
+@media only screen and (max-width: 480px){
+    .cta{
+        padding: 13px 20px;
+        font-size: 11px
+    }
+}
 
 .btn1{
     border-top-left-radius: 15px; 
@@ -368,8 +374,17 @@
 
 
 @media only screen and (max-width: 576px){
-   .cover .feature{
-       /* grid-column: 4/4; */
+   .cover{
+       display: flex;
+       flex-direction: column;
+       width: 100%;
+   }
+   .feature{
+       width: 100%;
+   }
+
+   .feature img{
+       height: 400px;
    }
 }
 
@@ -411,6 +426,13 @@
         padding: 11.5px 22px;
     }
 }
+
+@media only screen and (max-width: 480px){
+    .subscribe input{
+        font-size: 1.2rem;
+    }
+}
+
 
 /******************************************
           Team Member styles
