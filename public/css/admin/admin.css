@@ -314,7 +314,7 @@ main{
 
 /* Sidebar section */
 #sidebar{
-    background: #020509;
+    background: #34495e;
     grid-area: sidebar;
     overflow-y: auto;
     padding: 20px;
