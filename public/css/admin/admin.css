@@ -59,8 +59,16 @@ body{
     color: #3b9668;
 }
 
+.cprimary{
+    color: white;
+    background-color: #34495e;
+}
+.cprimary:hover{
+    color: white;
+}
+
 .container__custom{
-    display: grid;
+    display: grid; 
     height: 100vh;
     grid-template-columns: 0.8fr 1fr 1fr 1fr;
     grid-template-rows: 0.2fr 3fr;
@@ -361,6 +369,10 @@ main{
     margin-bottom: 5px;
 }
 
+.sidebar__link:hover{
+    background:  rgba(62, 161, 117, 0.3);
+    color: #3ea175;
+}
 .active_menu_link{
     background:  rgba(62, 161, 117, 0.3);
     color: #3ea175;
@@ -399,6 +411,26 @@ main{
     position: absolute;
 }
 
+.input-side{
+    margin: 20px;
+}
+
+.input-side button{
+    background:  rgba(62, 161, 117, 0.3);
+    color: #3ea175;
+}
+
+.input-side button:hover{
+    color: white;
+    background:  rgba(62, 161, 117);
+}
+.input-sec h3{
+    margin: 20px;
+}
+
+.Category-panel{
+    padding: 20px;
+}
 @media only screen and (max-width: 978px){
     .container__custom{
         grid-template-columns: 1fr;

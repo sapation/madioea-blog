@@ -1,0 +1,94 @@
+<!-- Header section -->
+<%-include('inc/header.ejs')-%>
+
+    <!-- Navigation section -->
+    <%-include('inc/navbar.ejs')-%>
+
+        <main>
+            <div class="main__container">
+                <div class="main__title">
+                    <img src="../img/admin/hello.svg" alt="">
+                    <div class="main__greeting">
+                        <h1>Hello Madiora</h1>
+                        <p>Welcome to your Categories dashboard</p>
+                    </div>
+                    
+                </div><hr><br>
+                <div class="card p-2 Category-panel">
+                    <div class="row">
+                        <div class="col-md-4 input-sec">
+                            <h3>Add Category</h3>
+                            <form action="/admin/addCategory" method="post">
+                            <div class="input-side">
+                                <label for="">Category Name</label>
+                                <input type="text" class="form-control" name="category_name" required><br>
+                                <button type="submit" class="btn ">Add Category</button>
+                            </div>
+                        </form>
+                        </div>
+                        <div class="col-md-8">
+                            <h1 class="text-center">All Categories Available</h1><br>
+                            <table class="table table-hover table-bordered">
+                                <thead>
+                                  <tr>
+                                    <th><input type="checkbox"></th>
+                                    <th>Category Name</th>
+                                    <th>Count</th>
+                                    <th></th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <% if(categories.length > 0){%>
+                                    <% categories.forEach((category)=>{%>
+                                  <tr>
+                                    <td><input type="checkbox"></td>
+                                    <td><%= category.category_name%></td>
+                                    <td>2</td>
+                                    <td data-id="<%= category._id %>">
+                                      <a href="#" data-id="<%= category._id %>" class="btn cprimary edit-btn" id="category_edit"><i class="fa fa-edit"></i></a>
+                                      <a href="#"data-id="<%= category._id %>"  class="btn btn-danger delete-btn"><i class="fa fa-trash"></i></a>
+                                
+                                    </td>
+                                  </tr>
+                                  <% })%>
+                                  
+          
+                                  <%}else{%>
+                                    <h2>No Category Available</h2>
+                                    <% }%>
+                                </tbody>
+                                
+                              </table>
+                        </div>
+                    </div>
+           </div>
+                </div>
+        </main>
+
+
+        <%-include('inc/sidebar.ejs')-%>
+            <%-include('inc/footer.ejs')-%>
+            <script src="../js/admin/category.js"></script>
+
+<!-- Modal -->
+<div class="modal fade" id="editCategory" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-md">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Edit Category</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <input type="hidden" name="id">
+        <form action="" method="POST">
+          <label for="">Category Name</label>
+          <input type="text" class="form-control" name="category_name" required><br>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn cprimary" onclick="editCategory()">Update</button>
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+      </div>
+    </form>
+    </div>
+  </div>
+</div>   
