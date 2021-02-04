@@ -1,3 +1,49 @@
+$(document).ready(function(){
+
+    $('#addCategory').unbind('submit').bind('submit', function(e){
+        e.preventDefault();
+       let addCatName = $('#addCatName').val();
+
+       if(addCatName == ""){
+            $("#addCatName").after('<p class="text-danger">Category Name field is required</p>');
+            $('#addCatName').closest('.form-control').addClass('is-invalid');
+       }else{
+            $("#category_name").find('.text-danger').remove();
+            $("#category_name").closest('.form-control').addClass('is-valid');	
+       }
+
+       if(addCatName){
+
+        let form = $(this);
+        console.log(JSON.stringify(form.serialize()))
+
+        $.ajax({
+            url : form.attr('action'),
+            type: form.attr('method'),
+            data: form.serialize(),
+            dataType: 'json',
+            success:function(response) {
+
+                $('#category-messages').html('<div class="alert alert-success">'
+                + response.msg +
+              '</div>');
+    
+                $(".alert-success").delay(500).show(10, function() {
+                        $(this).delay(3000).hide(10, function() {
+                            $(this).remove();
+                        });
+                    }); 
+
+                    setTimeout(function(){ window.location.href = response.redirect; }, 3000);
+            }
+            
+        })
+       }
+
+    })
+})
+
+
 const deleteBtn = document.getElementsByClassName('delete-btn');
 const editBtn = document.getElementsByClassName('edit-btn');
 
@@ -16,7 +62,6 @@ for(let i =0; i<editBtn.length; i++){
             method:'POST'
         }).then(res => res.json())
           .then(data =>{
-              console.log(data);
             modal.find('form').attr('action', '/admin/editCategory/' + id );
             modal.find('[name=category_name]').val( data.category_name );
             modal.find('[name=id]').val(data._id);
@@ -31,18 +76,52 @@ for(let i =0; i<editBtn.length; i++){
 
 const editCategory =()=>{
     const modal = $('#editCategory');
-    const id = modal.find('[name=id]').val();
-    const urlPoint = `editCategory/${id}`;
-    let catName = modal.find('[name=category_name]').val();
-    $.ajax({
-        method: "POST",
-        url: urlPoint,
-        data: { category_name : catName}
-      })
-        .done(function( msg ) {
-          alert( "Data Saved: " + msg );
-        });
+        let cateName = $('#category_name').val();
+        
+        if(cateName == ""){
+            $("#category_name").after('<p class="text-danger">Category Name field is required</p>');
+            $('#category_name').closest('.form-control').addClass('is-invalid');
+        }else{
+            // remov error text field
+                $("#category_name").find('.text-danger').remove();
+                // success out for form 
+                $("#category_name").closest('.form-control').addClass('is-valid');	
+        }
+    
+        if(cateName){
+            $('#editCategoryForm').unbind('submit').bind('submit', function(e){
+                e.preventDefault();
+            let form = $(this);
+            $.ajax({
+                url : form.attr('action'),
+                type: form.attr('method'),
+                data: form.serialize(),
+                dataType: 'json',
+                success:function(response) {
+                    modal.modal('hide');
+
+                    $('#category-messages').html('<div class="alert alert-success">'+
+                    '<strong><i class="glyphicon glyphicon-ok-sign"></i></strong> '+ response.msg +
+                  '</div>');
+        
+                    $(".alert-success").delay(500).show(10, function() {
+                            $(this).delay(3000).hide(10, function() {
+                                $(this).remove();
+                            });
+                        }); 
+
+                        setTimeout(function(){ window.location.href = response.redirect; }, 3000);
+                        
+            
+                }
+                
+            })
+
+    })
 }
+    return false;
+}
+  
 
 
 /********************************************
@@ -52,14 +131,50 @@ for(let i = 0; i<deleteBtn.length; i++){
     deleteBtn[i].addEventListener('click', (e)=>{
         e.preventDefault();
         const id = deleteBtn[i].dataset.id;
-        const endpoint = `deleteCategory/${id}`;
-        fetch(endpoint,{
-            method:'DELETE'
-        }).then(res=> res.json())
-        .then((result)=>{
-            window.location.href = result.redirect;
-            alert(result.msg);
-        }).catch(error=>console.log(error))
-    })
+        const modal = $('#deleteCategory');
+        modal.find('form').attr('action',`/admin/deleteCategory/${id}`);
+        modal.find('[name=editcategory]').val(id);
+        modal.modal('show');
+    //     const endpoint = `deleteCategory/${id}`;
+    //     fetch(endpoint,{
+    //         method:'DELETE'
+    //     }).then(res=> res.json())
+    //     .then((result)=>{
+    //         window.location.href = result.redirect;
+    //         alert(result.msg);
+    //     }).catch(error=>console.log(error))
+ })
     
+}
+
+const deleteCategory = ()=>{
+    
+    const id = $('#editCategoryValue').val();
+    const modal = $('#deleteCategory');
+   
+        $('#deleteCategoryForm').unbind('submit').bind('submit', function(e){
+            e.preventDefault();
+            let form = $(this);
+            $.ajax({
+                url:form.attr('action'),
+                type:form.attr('method'),
+                dataType: 'json',
+                success:function(response){
+                    modal.modal('hide');
+                    $('#category-messages').html('<div class="alert alert-success">'+
+                    '<strong><i class="glyphicon glyphicon-ok-sign"></i></strong> '+ response.msg +
+                  '</div>');
+        
+                    $(".alert-success").delay(500).show(10, function() {
+                            $(this).delay(3000).hide(10, function() {
+                                $(this).remove();
+                            });
+                        }); 
+
+                        setTimeout(function(){ window.location.href = response.redirect; }, 3000);
+                }
+            })
+        })
+
+    return false;
 }

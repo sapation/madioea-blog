@@ -15,7 +15,7 @@ router.get('/categories', adminController.getCategories);
 router.post('/addCategory', adminController.addCategory);
 router.post('/getCategory/:id', adminController.getCategory);
 router.post('/editCategory/:id', adminController.editCategory);
-router.delete('/deleteCategory/:id', adminController.getDeleteCategory);
+router.post('/deleteCategory/:id', adminController.getDeleteCategory);
 
 
 module.exports = router;

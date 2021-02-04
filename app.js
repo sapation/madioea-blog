@@ -9,7 +9,7 @@ const port = 5000;
 
 
 const url ='mongodb+srv://sumaila:Littleman@50@cluster0.bg5k4.mongodb.net/madioraBlogApp?retryWrites=true&w=majority';
-mongoose.connect(url, {useNewUrlParser: true, useUnifiedTopology: true,})
+mongoose.connect(url, {useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false })
 .then(()=>{
     console.log('Connected');
     app.listen(port, ()=>{

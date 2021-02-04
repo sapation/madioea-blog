@@ -3,8 +3,9 @@
 
     <!-- Navigation section -->
     <%-include('inc/navbar.ejs')-%>
-
+    
         <main>
+          
             <div class="main__container">
                 <div class="main__title">
                     <img src="../img/admin/hello.svg" alt="">
@@ -15,13 +16,17 @@
                     
                 </div><hr><br>
                 <div class="card p-2 Category-panel">
+                  <div id="category-messages"></div>
                     <div class="row">
                         <div class="col-md-4 input-sec">
                             <h3>Add Category</h3>
-                            <form action="/admin/addCategory" method="post">
+                            <form action="/admin/addCategory" method="post" id="addCategory">
                             <div class="input-side">
-                                <label for="">Category Name</label>
-                                <input type="text" class="form-control" name="category_name" required><br>
+                                <div class="form-group">
+                                  <label for="">Category Name</label>
+                                <input type="text" class="form-control" id="addCatName" name="category_name" ><br>
+                                <input type="hidden" name="post_assign" value="0">
+                                </div>
                                 <button type="submit" class="btn ">Add Category</button>
                             </div>
                         </form>
@@ -33,7 +38,7 @@
                                   <tr>
                                     <th><input type="checkbox"></th>
                                     <th>Category Name</th>
-                                    <th>Count</th>
+                                    <th>Post Assign</th>
                                     <th></th>
                                   </tr>
                                 </thead>
@@ -43,10 +48,10 @@
                                   <tr>
                                     <td><input type="checkbox"></td>
                                     <td><%= category.category_name%></td>
-                                    <td>2</td>
+                                    <td><%= category.post_assign%></td>
                                     <td data-id="<%= category._id %>">
                                       <a href="#" data-id="<%= category._id %>" class="btn cprimary edit-btn" id="category_edit"><i class="fa fa-edit"></i></a>
-                                      <a href="#"data-id="<%= category._id %>"  class="btn btn-danger delete-btn"><i class="fa fa-trash"></i></a>
+                                      <a href="#"data-id="<%= category._id %>"  class="btn btn-danger delete-btn" id="category_delete"><i class="fa fa-trash"></i></a>
                                 
                                     </td>
                                   </tr>
@@ -70,7 +75,7 @@
             <%-include('inc/footer.ejs')-%>
             <script src="../js/admin/category.js"></script>
 
-<!-- Modal -->
+<!-- Edit Modal -->
 <div class="modal fade" id="editCategory" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-md">
     <div class="modal-content">
@@ -80,15 +85,42 @@
       </div>
       <div class="modal-body">
         <input type="hidden" name="id">
-        <form action="" method="POST">
+        <form action="" method="POST" id="editCategoryForm">
+         <div class="form-group">
           <label for="">Category Name</label>
-          <input type="text" class="form-control" name="category_name" required><br>
+          <input type="text" class="form-control " name="category_name" id="category_name" required><br>
+          <input type="hidden" name="post_assign" value="0">
+         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn cprimary" onclick="editCategory()">Update</button>
+        <button type="submit" class="btn cprimary" onclick="editCategory()" id="editButton">Update</button>
         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
       </div>
     </form>
     </div>
   </div>
 </div>   
+
+
+<!-- Delete Modal -->
+
+<div class="modal fade" id="deleteCategory" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-md">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Delete Category</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>                                                                                                                                                                                                                                                                                                                                                                                                                            
+      <div class="modal-body">
+        <form action="" method="POST" id="deleteCategoryForm">  
+          <label class="text-danger">I you sure you want to Delete the Category</label>
+          <input type="hidden" class="form-control " name="editcategory" id="editCategoryValue" required><br>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn cprimary" onclick="deleteCategory()" id="deleteButton">Delete</button>
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+      </div>
+    </form>
+    </div>
+  </div>
+</div> 

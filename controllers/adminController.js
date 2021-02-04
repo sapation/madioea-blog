@@ -46,9 +46,12 @@ exports.getCategory = (req, res, next)=>{
 
 exports.editCategory =(req, res, next)=>{
     let id = req.params.id;
+    let catName = req.body.category_name;
+    // console.log(req.body);
     Category.findOneAndUpdate({_id:id},
-         {category_name:req.body}).then((result)=>{
+         {'category_name':catName}).then((result)=>{
         res.json({
+            success:true,
             redirect:'/admin/categories',
             msg:'Category Editted Successfully'
         });
@@ -59,8 +62,10 @@ exports.editCategory =(req, res, next)=>{
 exports.addCategory = (req, res , next)=>{
     let category = new Category(req.body);
     category.save().then(()=>{
-        console.log('Category add successfully');
-        res.redirect('/admin/categories')
+        res.json({
+            redirect:'/admin/categories',
+            msg:'Successfully Added Category'
+        });
     }).catch((error)=>console.log(error))
 }
 
@@ -69,7 +74,7 @@ exports.getDeleteCategory =(req, res, next)=>{
     Category.findByIdAndDelete(id).then((result)=>{
         res.json({
             redirect:'/admin/categories',
-            msg:'Successfully deleted'
+            msg:'Successfully deleted category'
         });
     }).catch(err=>console.log(err));
 }
