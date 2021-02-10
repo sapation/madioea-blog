@@ -1,50 +1,176 @@
 <!-- Header section -->
 <%-include('inc/header.ejs')-%>
 
-    <!-- Navigation section -->
-    <%-include('inc/navbar.ejs')-%>
+<!-- Navigation section -->
+<%-include('inc/navbar.ejs')-%>
 
-        <main>
-            <div class="main__container">
-                <div class="main__title">
-                    <img src="../img/admin/hello.svg" alt="">
-                    <div class="main__greeting">
-                        <h1>Hello Madiora</h1>
-                        <p>Welcome to your Posts dashboard</p>
-                    </div>
-                </div><hr><br>
-                <div class="panel panel-default p-2">
-                    <h1 class="text-center">All Post Available</h1><br>
-                <table class="table table-hover table-bordered">
-                    <thead>
-                      <tr>
-                        <th>Firstname</th>
-                        <th>Lastname</th>
-                        <th>Email</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>John</td>
-                        <td>Doe</td>
-                        <td>john@example.com</td>
-                      </tr>
-                      <tr>
-                        <td>Mary</td>
-                        <td>Moe</td>
-                        <td>mary@example.com</td>
-                      </tr>
-                      <tr>
-                        <td>July</td>
-                        <td>Dooley</td>
-                        <td>july@example.com</td>
-                      </tr>
-                    </tbody>
-                  </table>
-           </div>
-                </div>
-        </main>
+<main>
+  <div class="main__container">
+    <div class="main__title">
+      <img src="../img/admin/hello.svg" alt="" />
+      <div class="main__greeting">
+        <h1>Hello Madiora</h1>
+        <p>Welcome to your Posts dashboard</p>
+      </div>
+    </div>
+    <hr />
+    <br />
+    <div id="post-messages"></div>
+    <div class="card p-2">
+     <div class="post-title">
+      <h1 class="">All Post Available</h1>
+      <button type="button" class="btn cprimary" data-bs-toggle="modal" data-bs-target="#addPostModal">
+        Add post
+      </button>
+     </div>
+      <br />
+      <div class="table-responsive">
+      <table class="table table-hover table-bordered">
+        <thead>
+          <tr>
+            <th>Image</th>
+            <th>Post Tittle</th>
+            <th>Category</th>
+            <th>Status</th>
+            <th>Author</th>
+            <th>Date Publish</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% if(posts.length > 0){%>
+            <% posts.forEach((post)=>{%>
+          <tr>
+            <td>2</td>
+            <td><%=post.postName %></td>
+            <td><%=post.postCategory%></td>
+            <td>
+              <%=post.postStatus%>
+            </td>
+            <td>Doe</td>
+            <td><%=post.updatedAt.toDateString()
+              %></td>
+            <td>
+              <a href="#" data-id="<%= post._id %>" class="btn cprimary edit-btn" id="category_edit"><i class="fa fa-edit"></i></a>
+              <a href="#"data-id="<%= post._id %>"  class="btn btn-danger delete-btn" id="category_delete"><i class="fa fa-trash"></i></a>
+            </td>
+          </tr>
+          <% })%>
+                                  
+          
+          <%}else{%>
+            <h2>No Post Available</h2>
+            <% }%>
+        </tbody>
+      </table>
+      </div>
+    </div>
+  </div>
+</main>
+
+<%-include('inc/sidebar.ejs')-%> 
+<%-include('inc/footer.ejs')-%>
+<script src="../js/admin/third-party/ckeditor/ckeditor.js"></script>
+<script src="../js/admin/posts.js"></script>
+<!-- Add Post Modal Section -->
 
 
-        <%-include('inc/sidebar.ejs')-%>
-            <%-include('inc/footer.ejs')-%>
+<div
+  class="modal fade"
+  id="addPostModal"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="staticBackdropLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Add Post Modal</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form action="/admin/addPost" method="POST" id="addPostForm" enctype="multipart/form-data">
+          <div class="col mb-3">
+            <label for="post image">Post Image</label>
+            <input type="file" class="form-control" placeholder="Post Image" name="postImage" id="postImage" aria-label="Post Image" multiple>
+          </div>
+          <div class="row mb-3">
+            <div class="col">
+              <label for="post title">Post Tittle</label>
+              <input type="text" class="form-control" placeholder="Post Title" name="postName" id="postName" aria-label="First name">
+            </div>
+            <div class="col">
+              <label for="post category"></label>
+              <label for="select category">Select category</label>
+              <select class="form-control" id="postCategory" name="postCategory" aria-label="Post category">
+                <option value="">Select category</option>
+                <% if(categories.length > 0){%>
+                  <% categories.forEach((category)=>{%>
+                    <option value="<%=category.category_name%>"><%=category.category_name%></option>
+                  <%})%>
+               <% }%>
+              </select>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="post body" class="form-label">Post Body</label>
+            <textarea class="form-control" id="postBody" name="postBody" rows="3"></textarea>
+          </div>
+
+          <div class="row mb-3">
+            <div class="col-md-6">
+              <label for="post category"> Post Status</label>
+              <select class="form-control" id="postStatus" name="postStatus" aria-label="Post Status">
+                <option value="">Select category</option>
+                <option value="draft">Draft</option>
+                <option value="publish">Publish</option>
+              </select>
+            </div>
+            
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="submit"  class="btn btn-primary">Add Post</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+      </div>
+    </form>
+    </div>
+  </div>
+</div>
+
+<script>
+  CKEDITOR.replace('postBody');
+</script>
+
+
+<!-- Post Delete modal -->
+
+<div class="modal fade" id="deletePost" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-md">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Delete Category</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>                                                                                                                                                                                                                                                                                                                                                                                                                            
+      <div class="modal-body">
+        <form action="" method="POST" id="deletePostForm">  
+          <label class="text-danger">I you sure you want to Delete the Post</label>
+          <input type="hidden" class="form-control " name="deletePost" id="deletePostV" required><br>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn cprimary" onclick="deletePost()" id="deleteButton">Delete</button>
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+      </div>
+    </form>
+    </div>
+  </div>
+</div> 

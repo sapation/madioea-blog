@@ -2,7 +2,7 @@
 
 /* Scroll bar styleing */
 ::-webkit-scrollbar{
-    width: 5px;
+    width: 10px;
     height: 6px
 }
 
@@ -431,6 +431,13 @@ main{
 .Category-panel{
     padding: 20px;
 }
+.post-title{
+    display: flex;
+    justify-content: space-between;
+}
+
+
+
 @media only screen and (max-width: 978px){
     .container__custom{
         grid-template-columns: 1fr;
