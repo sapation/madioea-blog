@@ -4,10 +4,15 @@
         <div class="row">
             <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="owl-carousel owl-theme" id="categories">
+                    <% if(categories.length > 0){%>
+                        <% categories.forEach(category=>{%>
                     <div class="service-wrap text-center">
-                        <h3>Development</h3>
+                        <a href="#"><h3><%= category.category_name %></h3></a>
                     </div>
-                    <div class="service-wrap text-center">
+                    <% }) %>
+
+                    <%}%>
+                    <!-- <div class="service-wrap text-center">
                         <h3>Support</h3>
                     </div>
                     <div class="service-wrap text-center">
@@ -24,7 +29,7 @@
                     </div>
                     <div class="service-wrap text-center">
                         <h3>Marketing</h3>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>

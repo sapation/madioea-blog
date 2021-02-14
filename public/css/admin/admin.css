@@ -1,5 +1,122 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap');
 
+#login-home{
+    min-height: 100vh;
+    background: linear-gradient(120deg,#3498db, #8e44ad),url('../../img/chinoso.jpg');
+    background-blend-mode: screen;
+    background-size:cover;
+}
+
+.login-form{
+    width: 360px;
+    background: #f1f1f1;
+    height: 500px;
+    padding: 80px 40px;
+    border-radius: 10px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+}
+
+.login-form h1{
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.txtb{
+    border-bottom: 2px solid #adadad;
+    position: relative;
+    margin: 30px 0;
+}
+
+.txtb-err{
+    border-bottom: 2px solid #dc3545;
+}
+
+.txtb-scc{
+    border-bottom: 2px solid rgba(62, 161, 117);
+}
+
+.txtb input{
+    font-size: 15px;
+    color: #333;
+    border: none;
+    width: 100%;
+    outline: none;
+    background: none;
+    padding: 0 3px;
+    height: 30px;
+}
+
+.txtb span::before{
+    content: attr(data-placeholder);
+    position: absolute;
+    top: 50%;
+    left: 5px;
+    color: #adadad;
+    transform: translateY(-70%);
+    z-index: -1;
+    transition: .5s;
+}
+
+.txtb span::after{
+    content: "";
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    /* background: linear-gradient(120deg, #3498db,#8e44ad); */
+    transition: .5s;
+}
+
+.focus + span::before{
+    top: -5px;
+}
+.focus + span::after{
+    width: 100%;
+}
+
+.logbtn{
+    display: block;
+    width: 100%;
+    height: 50px;
+    border: none;
+    background: linear-gradient(120deg, #3498db,#8e44ad, #3498db);
+    background-size: 200%;
+    color: #fff;
+    outline: none;
+    cursor: pointer;
+    transition: .5s;
+    font-size: 20px;
+    border-radius: 50px;
+}
+
+.logbtn:hover{
+    background-position: right;
+}
+
+.logbtn:focus{
+    outline: none;
+}
+
+.bottom-text{
+ margin-top: 60px;
+ text-align: center;
+ font-size: 13px;
+}
+
+.loading{
+    display: none;
+}
+.loading img{
+    width: 30px;
+    margin-left: 40%;
+    margin-top: 20px;
+}
+
+.loading-img{
+    display: block;
+}
 /* Scroll bar styleing */
 ::-webkit-scrollbar{
     width: 10px;
@@ -328,6 +445,7 @@ main{
     padding: 20px;
     -webkit-transition: all 0.5s;
     transition: all 0.5s;
+    height: 100vh;
 }
 
 .sidebar__img{
@@ -398,10 +516,16 @@ main{
     color: #e65061;
 }
 
-.sidebar__logout > a{
-    text-decoration: none;
+.sidebar__logout > button{
+    background: none;
+    border: none;
     color: #e65061;
-    text-transform: uppercase
+    text-transform: uppercase;
+
+}
+
+.sidebar__logout > button:focus{
+    outline: none;
 }
 
 .sidebar_responsive{
@@ -435,6 +559,8 @@ main{
     display: flex;
     justify-content: space-between;
 }
+
+
 
 
 

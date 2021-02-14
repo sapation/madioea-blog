@@ -1,5 +1,48 @@
 <%-include('inc/header.ejs')-%>
 
-<h1>Hello login form</h1>
+<section id="login-home">
+    <div class="">
+        <form action="/admin/login" id="loginForm" class="login-form" method="POSt">
+            <div id="login-messages"></div>
+            <h1>Login Page</h1>
+            
+            <div class="txtb">
+                <input type="email" name="email" id="email" required>
+                <span data-placeholder="Email"></span>
+            </div>
+        
+            <div class="txtb">
+                <input type="password" name="password" id="password" required>
+                <span data-placeholder="Password"></span>
+            </div>
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+            <button type="submit" class="logbtn" value="">Login  </button>
+             
+            <span class="loading"><img src="../img/admin/760-unscreen.gif" alt="" srcset=""></span>
+            <div class="bottom-text">
+                Don't have account ? <a href="">Contact Admin</a>
+            </div>
+        </form>
+    </div>
+</section>
 
 <%-include('inc/footer.ejs')-%>
+<script src="../js/admin/login.js"></script>
+<script src="../js/jquery.ripples-min.js"></script>
+<script>
+    $(".txtb input").on("focus", function(){
+        $(this).addClass("focus");
+    });
+
+    $(".txtb input").on("blur", function(){
+        if($(this).val() =="")
+        $(this).removeClass("focus");
+    })
+
+    //Water ripples effect
+    $('#login-home').ripples({
+      dropRadius: 15,
+      perturbance: 0.01,
+      
+    });
+</script>

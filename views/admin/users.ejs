@@ -1,0 +1,234 @@
+<!-- Header section -->
+<%-include('inc/header.ejs')-%>
+
+<!-- Navigation section -->
+<%-include('inc/navbar.ejs')-%>
+<main>
+    <div class="main__container">
+      <div class="main__title">
+        <img src="../img/admin/hello.svg" alt="" />
+        <div class="main__greeting">
+          <h1>Hello <%= sessionUser.firstname %></h1>
+          <p>Welcome to your Users dashboard</p>
+        </div>
+      </div>
+      <hr />
+
+      <div id="post-messages"></div>
+      <div class="card p-2">
+        <div id="user-messages"></div>
+       <div class="post-title">
+        <h1 class="">All Users Available</h1>
+        <button type="button" class="btn cprimary" data-bs-toggle="modal" data-bs-target="#addUserModal">
+          Add User
+        </button>
+       </div>
+        <br />
+        <div class="table-responsive">
+        <table class="table table-hover table-bordered">
+          <thead>
+            <tr>
+              <td><input type="checkbox"/></td>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Role</th>
+              <th>post count</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% if(users.length > 0){%>
+                <% users.forEach((user)=>{%>
+            <tr>
+                <td><input type="checkbox"/></td>
+                <td><%=user.firstname%>  <%=user.lastname%></td>
+                <td> <%=user.email%></td>
+                <td> <%=user.role%></td>
+                <td>10</td>
+                <td >
+                    <a href="#" data-id="<%= user._id %>" class="btn cprimary edit-btn" id="user_edit"><i class="fa fa-edit"></i></a>
+                    <a href="#"data-id="<%= user._id %>"  class="btn btn-danger delete-btn" id="user_delete"><i class="fa fa-trash"></i></a>
+                  </td>
+            </tr>
+            <% })%>
+
+            <%}else{%>
+              <h2>No User Available</h2>
+              <% }%>
+          </tbody>
+        </table>
+        </div>
+      </div>
+    </div>
+    </main>
+    
+
+    <%-include('inc/sidebar.ejs')-%>
+    <%-include('inc/footer.ejs')-%>
+    <script src="../js/admin/user.js"></script>
+
+  
+  <!-- Add User Modal -->
+  <div class="modal fade" id="addUserModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Add User Modal</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form action="/admin/addUser" method="POST" id="addUserForm">
+            <div class="row mb-3">
+                <div class="col">
+                  <label for="post title">Firstname</label>
+                  <input type="text" class="form-control" placeholder="Firstname" name="firstname" id="firstname" aria-label="First name">
+                </div>
+                <div class="col">
+                    <label for="post title">Lastname</label>
+                    <input type="text" class="form-control" placeholder="Lastname" name="lastname" id="lastname" aria-label="First name">
+                  </div>
+             </div>
+             <div class="row mb-3">
+               <div class="col">
+                <label for="post title">Email</label>
+                <input type="email" class="form-control" placeholder="Email" name="email" id="email" aria-label="First name">
+               </div>
+             </div>
+
+             <div class="row mb-3">
+                <div class="col">
+                  <label for="post title">Password</label>
+                  <input type="password" class="form-control" placeholder="Password" name="password" id="password" aria-label="First name">
+                </div>
+                <div class="col">
+                    <label for="post title">Role</label>
+                    <select class="form-control" id="role" name="role" aria-label="Post category">
+                        <option value="">Select role</option>
+                        <option value="admin">Admin</option>
+                        <option value="author">Author</option>
+                    </select>
+                  </div>
+             </div>
+
+             <div class="row mb-3">
+                <div class="col">
+                 <label for="post title">Bio</label>
+                 <textarea name="bio" id="bio" class="form-control" cols="3" rows="3"></textarea>
+                </div>
+              </div>
+              <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+        </div>
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">Save User</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+    </form>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- edit section -->
+  <!-- Modal -->
+<div class="modal fade" id="editUserModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Edit User Modal Form</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <nav>
+                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                  <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">User Profile</button>
+                  <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Password</button>
+                </div>
+              </nav>
+              <div class="tab-content" id="nav-tabContent">
+                <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                   <br>
+                    <form action="" method="POST" id="editUserForm">
+                      <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                        <div class="row mb-3">
+                            <div class="col">
+                              <label for="post title">Firstname</label>
+                              <input type="text" class="form-control" placeholder="Firstname" name="editfirstname" id="editfirstname" aria-label="First name">
+                            </div>
+                            <div class="col">
+                                <label for="post title">Lastname</label>
+                                <input type="text" class="form-control" placeholder="Lastname" name="editlastname" id="editlastname" aria-label="First name">
+                              </div>
+                         </div>
+                         <div class="row mb-3">
+                           <div class="col">
+                            <label for="post title">Email</label>
+                            <input type="email" class="form-control" placeholder="Email" name="editemail" id="editemail" aria-label="First name">
+                           </div>
+                         </div>
+            
+                         <div class="row mb-3">
+                            <div class="col">
+                                <label for="post title">Role</label>
+                                <select class="form-control" id="editrole" name="editrole" aria-label="Post category">
+                                    <option value="">Select role</option>
+                                    <option value="admin">Admin</option>
+                                    <option value="author">Author</option>
+                                </select>
+                              </div>
+                         </div>
+            
+                         <div class="row mb-3">
+                            <div class="col">
+                             <label for="post title">Bio</label>
+                             <textarea name="editbio" id="editbio" class="form-control" cols="3" rows="3"></textarea>
+                            </div>
+                          </div>
+
+                          <button type="submit" class="btn btn-primary" onclick="editUser()">Save changes</button>
+                    </form>
+                </div>
+                <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                   <br>
+                    <form action="" method="POST" id="editPasswordForm">
+                      <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                    <div class="row">
+                        <div class="col mb-3">
+                            <label for="post title">Password</label>
+                            <input type="password" class="form-control" placeholder="Password" name="editpassword" id="editpassword" aria-label="First name">
+                          </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary" onclick="editPassword()">Save password</button>
+                   </form>
+                </div>
+              </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+         
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Delete Modal -->
+<div class="modal fade" id="deleteUser" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-md">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Delete Category</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>                                                                                                                                                                                                                                                                                                                                                                                                                            
+      <div class="modal-body">
+        <form action="" method="POST" id="deleteUserForm">  
+          <label class="text-danger">I you sure you want to Delete the User</label>
+          <input type="hidden" class="form-control " name="editUserInput" id="editUserValue" required><br>
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn cprimary" onclick="deleteUser()" id="deleteButton">Delete</button>
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+      </div>
+    </form>
+    </div>
+  </div>
+</div> 

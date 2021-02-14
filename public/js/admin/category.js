@@ -1,3 +1,4 @@
+
 $(document).ready(function () {
   $("#addCategory")
     .unbind("submit")
@@ -11,8 +12,8 @@ $(document).ready(function () {
         );
         $("#addCatName").closest(".form-control").addClass("is-invalid");
       } else {
-        $("#category_name").find(".text-danger").remove();
-        $("#category_name").closest(".form-control").addClass("is-valid");
+        $("#addCatName").find(".text-danger").remove();
+        $("#addCatName").closest(".form-control").addClass("is-valid");
       }
 
       if (addCatName) {
@@ -58,7 +59,13 @@ for (let i = 0; i < editBtn.length; i++) {
     const id = editBtn[i].dataset.id;
     const modal = $("#editCategory");
     const urlPoint = `getCategory/${id}`;
+    const token = modal.find("[name=_csrf]").val();
+    
     fetch(urlPoint, {
+      credentials: 'same-origin',
+      headers: {
+        'CSRF-Token': token 
+      },
       method: "POST",
     })
       .then((res) => res.json())
@@ -76,6 +83,7 @@ for (let i = 0; i < editBtn.length; i++) {
  ***************************************/
 
 const editCategory = () => {
+ 
   const modal = $("#editCategory");
   let cateName = $("#category_name").val();
 
@@ -139,7 +147,7 @@ for (let i = 0; i < deleteBtn.length; i++) {
   deleteBtn[i].addEventListener("click", (e) => {
     e.preventDefault();
     const id = deleteBtn[i].dataset.id;
-    const modal = $("#deletePost");
+    const modal = $("#deleteCategory");
     modal.find("form").attr("action", `/admin/deleteCategory/${id}`);
     modal.find("[name=deletePost]").val(id);
     modal.modal("show");
@@ -158,7 +166,8 @@ const deleteCategory = () => {
       $.ajax({
         url: form.attr("action"),
         type: form.attr("method"),
-        dataType: "json",
+        data: form.serialize(),
+        dataType: 'json',
         success: function (response) {
           modal.modal("hide");
           $("#category-messages").html(

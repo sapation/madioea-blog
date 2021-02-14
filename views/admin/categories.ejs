@@ -10,7 +10,7 @@
                 <div class="main__title">
                     <img src="../img/admin/hello.svg" alt="">
                     <div class="main__greeting">
-                        <h1>Hello Madiora</h1>
+                        <h1>Hello <%= sessionUser.firstname %></h1>
                         <p>Welcome to your Categories dashboard</p>
                     </div>
                     
@@ -26,6 +26,7 @@
                                   <label for="">Category Name</label>
                                 <input type="text" class="form-control" id="addCatName" name="category_name" ><br>
                                 <input type="hidden" name="post_assign" value="0">
+                                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                                 </div>
                                 <button type="submit" class="btn ">Add Category</button>
                             </div>
@@ -51,7 +52,7 @@
                                     <td><%= category.category_name%></td>
                                     <td><%= category.post_assign%></td>
                                     <td data-id="<%= category._id %>">
-                                      <a href="#" data-id="<%= category._id %>" class="btn cprimary edit-btn" id="category_edit"><i class="fa fa-edit"></i></a>
+                                      <a href="#" data-id="<%= category._id %>" class="btn cprimary edit-btn" id="category_edit" ><i class="fa fa-edit"></i></a>
                                       <a href="#"data-id="<%= category._id %>"  class="btn btn-danger delete-btn" id="category_delete"><i class="fa fa-trash"></i></a>
                                 
                                     </td>
@@ -92,6 +93,7 @@
           <label for="">Category Name</label>
           <input type="text" class="form-control " name="category_name" id="category_name" required><br>
           <input type="hidden" name="post_assign" value="0">
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>">
          </div>
       </div>
       <div class="modal-footer">
@@ -117,6 +119,7 @@
         <form action="" method="POST" id="deleteCategoryForm">  
           <label class="text-danger">I you sure you want to Delete the Category</label>
           <input type="hidden" class="form-control " name="editcategory" id="editCategoryValue" required><br>
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>">
       </div>
       <div class="modal-footer">
         <button type="submit" class="btn cprimary" onclick="deleteCategory()" id="deleteButton">Delete</button>
@@ -126,3 +129,4 @@
     </div>
   </div>
 </div> 
+

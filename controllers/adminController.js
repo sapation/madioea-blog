@@ -1,142 +1,53 @@
 const Category = require("../model/category");
 const Post = require("../model/posts");
-
+const User = require("../model/users");
+const bcrypt = require("bcrypt");
 
 exports.getIndex = (req, res, next) => {
   res.render("admin/index", {
     title: "admin-login",
+    csrfToken: req.csrfToken()
   });
 };
 
 exports.getDashboard = (req, res, next) => {
+console.log(Post.estimatedDocumentCount());
   res.render("admin/admin", {
     title: "admin-dashboard",
+    path: "/admin/dashboard",
   });
 };
 
-/******************************************************
- * post Section
- ***************************************************/
-// adding Post
-// {
-//   postName: req.body.postName,
-//   postCategory: req.body.postCategory,
-//   postBody: req.body.postBody,
-//   postStatus: req.body.postStatus,
-//   postImage: req.file.postImage,
-// }
-exports.addPost = (req, res, next) => {
-  const postImage = req.files[0].path.split('\\')[2];
-   console.log(req.body);
-  const post = new Post(
-    {
-        postName: req.body.postName,
-        postCategory: req.body.postCategory,
-        postBody: req.body.postBody,
-        postStatus: req.body.postStatus,
-        postImage: postImage
-      }
-  );
-  post
-    .save()
-    .then(() => {
-      res.send({
-        msg: "Successfully Added Post",
-        redirect: "/admin/posts",
+exports.checkLogin = (req, res, next) => {
+  let email = req.body.email;
+  let password = req.body.password;
+  User.findOne({ email: email }).then((user) => {
+    if (!user) {
+      res.json({
+        msg: "User Does not Exist",
       });
-    })
-    .catch((err) => console.log(err));
-};
-
-// getting all post
-exports.getPosts = (req, res, next) => {
-  Category.find().then((categories) => {
-    Post.find()
-      .then((posts) => {
-        res.render("admin/post", {
-          title: "admin-posts",
-          posts: posts,
-          categories: categories,
+    }
+    bcrypt.compare(password, user.password).then((isMatch) => {
+      if (!isMatch) {
+        res.json({
+          msg: "Email and password combination do not match",
         });
-      })
-      .catch((err) => console.log(err));
+      } else {
+        //req.setHeader("Set-Cookie", "isAuthenticated=true");
+        req.session.isAuthenticated = true;
+        req.session.user = user; 
+        res.json({
+          redirect: "/admin/dashboard",
+        });
+      }
+    });
   });
 };
 
-exports.getDeletePost = (req, res, next) => {
-  let id = req.params.id;
-  Post.findByIdAndDelete(id)
-    .then((result) => {
-      res.json({
-        redirect: "/admin/posts",
-        msg: "Successfully deleted post",
-      });
-    })
-    .catch((err) => console.log(err));
-};
 
-
-/******************************************************
- * Categories Section
- ***************************************************/
-
-exports.getCategories = (req, res, next) => {
-  let mysort = { length: -1 };
-  Category.find()
-    .sort(mysort)
-    .then((categories) => {
-      res.render("admin/categories", {
-        title: "admin-categories",
-        categories: categories,
-      });
-    })
-    .catch((error) => console.log(error));
-};
-
-exports.getCategory = (req, res, next) => {
-  let id = req.params.id;
-  Category.findById(id)
-    .then((data) => {
-      res.json(data);
-    })
-    .catch((err) => console.log(err));
-};
-
-exports.editCategory = (req, res, next) => {
-  let id = req.params.id;
-  let catName = req.body.category_name;
-  Category.findOneAndUpdate({ _id: id }, { category_name: catName })
-    .then((result) => {
-      res.json({
-        success: true,
-        redirect: "/admin/categories",
-        msg: "Category Editted Successfully",
-      });
-    })
-    .catch((err) => console.log(err));
-};
-
-exports.addCategory = (req, res, next) => {
-  let category = new Category(req.body);
-  category
-    .save()
-    .then(() => {
-      res.json({
-        redirect: "/admin/categories",
-        msg: "Successfully Added Category",
-      });
-    })
-    .catch((error) => console.log(error));
-};
-
-exports.getDeleteCategory = (req, res, next) => {
-  let id = req.params.id;
-  Category.findByIdAndDelete(id)
-    .then((result) => {
-      res.json({
-        redirect: "/admin/categories",
-        msg: "Successfully deleted category",
-      });
-    })
-    .catch((err) => console.log(err));
+exports.getLogout = (req, res, next) => {
+  req.session.destroy(err => {
+    console.log(err);
+    res.redirect('/admin');
+  });
 };

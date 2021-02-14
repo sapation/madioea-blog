@@ -9,7 +9,7 @@
     <div class="main__title">
       <img src="../img/admin/hello.svg" alt="" />
       <div class="main__greeting">
-        <h1>Hello Madiora</h1>
+        <h1>Hello <%= sessionUser.firstname %></h1>
         <p>Welcome to your Posts dashboard</p>
       </div>
     </div>
@@ -40,21 +40,24 @@
         <tbody>
           <% if(posts.length > 0){%>
             <% posts.forEach((post)=>{%>
-          <tr>
-            <td>2</td>
-            <td><%=post.postName %></td>
-            <td><%=post.postCategory%></td>
-            <td>
-              <%=post.postStatus%>
-            </td>
-            <td>Doe</td>
-            <td><%=post.updatedAt.toDateString()
-              %></td>
-            <td>
-              <a href="#" data-id="<%= post._id %>" class="btn cprimary edit-btn" id="category_edit"><i class="fa fa-edit"></i></a>
-              <a href="#"data-id="<%= post._id %>"  class="btn btn-danger delete-btn" id="category_delete"><i class="fa fa-trash"></i></a>
-            </td>
-          </tr>
+             <% if(post.author == sessionUser.firstname){%>
+             <tr>
+              <td><img src="../img/<%= post.postImage%>" alt="" srcset="" width="30"></td>
+              <td><%=post.postName %></td>
+              <td><%=post.postCategory%></td>
+              <td>
+                <%=post.postStatus%>
+              </td>
+              <td><%=post.author%></td>
+              <td><%=post.updatedAt.toDateString()
+                %></td>
+              <td>
+                <a href="#" data-id="<%= post._id %>" class="btn cprimary edit-btn" id="category_edit"><i class="fa fa-edit"></i></a>
+                <a href="#"data-id="<%= post._id %>"  class="btn btn-danger delete-btn" id="category_delete"><i class="fa fa-trash"></i></a>
+              </td>
+            </tr>
+             <%}%>
+          
           <% })%>
                                   
           
@@ -72,9 +75,9 @@
 <%-include('inc/footer.ejs')-%>
 <script src="../js/admin/third-party/ckeditor/ckeditor.js"></script>
 <script src="../js/admin/posts.js"></script>
+
+
 <!-- Add Post Modal Section -->
-
-
 <div
   class="modal fade"
   id="addPostModal"
@@ -107,7 +110,6 @@
               <input type="text" class="form-control" placeholder="Post Title" name="postName" id="postName" aria-label="First name">
             </div>
             <div class="col">
-              <label for="post category"></label>
               <label for="select category">Select category</label>
               <select class="form-control" id="postCategory" name="postCategory" aria-label="Post category">
                 <option value="">Select category</option>
@@ -133,7 +135,8 @@
                 <option value="publish">Publish</option>
               </select>
             </div>
-            
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+            <input type="hidden" name="author" id="author" value="<%= sessionUser.firstname %>">
           </div>
       </div>
       <div class="modal-footer">
@@ -147,30 +150,108 @@
   </div>
 </div>
 
-<script>
-  CKEDITOR.replace('postBody');
-</script>
 
+<!-- Edit section for the post -->
+
+<div
+  class="modal fade"
+  id="editPostModal"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="staticBackdropLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Edit Post Modal</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form action="" method="POST" id="editPostForm" enctype="multipart/form-data">
+          <div class="col mb-3">
+            <label for="post image">Post Image</label>
+            <input type="file" class="form-control" placeholder="Post Image" name="editpostImage" id="editpostImage" aria-label="Post Image" multiple>
+          </div>
+          <div class="row mb-3">
+            <div class="col">
+              <label for="post title">Post Tittle</label>
+              <input type="text" class="form-control" placeholder="Post Title" name="editpostName" id="editpostName" aria-label="First name">
+            </div>
+            <div class="col">
+              <label for="select category">Select category</label>
+              <select class="form-control" id="editpostCategory" name="editpostCategory" aria-label="Post category">
+                <option value="">Select category</option>
+                <% if(categories.length > 0){%>
+                  <% categories.forEach((category)=>{%>
+                    <option value="<%=category.category_name%>"><%=category.category_name%></option>
+                  <%})%>
+               <% }%>
+              </select>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="post body" class="form-label">Post Body</label>
+            <textarea class="form-control" id="editpostBody" name="editpostBody" rows="3"></textarea>
+          </div>
+
+          <div class="row mb-3">
+            <div class="col-md-6">
+              <label for="post category"> Post Status</label>
+              <select class="form-control" id="editpostStatus" name="editpostStatus" aria-label="Post Status">
+                <option value="">Select category</option>
+                <option value="draft">Draft</option>
+                <option value="publish">Publish</option>
+              </select>
+            </div>
+            <input type="hidden" value="0">
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+            <input type="hidden" name="editauthor" id="author" value="<%= sessionUser.firstname %>">
+          </div>
+          
+      </div>
+      <div class="modal-footer">
+        <button type="submit"  class="btn btn-primary" onclick="editPost()">Edit Post</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+      </div>
+    </form>
+    </div>
+  </div>
+</div>
 
 <!-- Post Delete modal -->
 
 <div class="modal fade" id="deletePost" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-md">
-    <div class="modal-content">
+    <div class="modal-content">   
       <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">Delete Category</h5>
+        <h5 class="modal-title" id="staticBackdropLabel">Delete Post Modal</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>                                                                                                                                                                                                                                                                                                                                                                                                                            
       <div class="modal-body">
-        <form action="" method="POST" id="deletePostForm">  
+        <form action="" method="POST" id="deletePostForm">
           <label class="text-danger">I you sure you want to Delete the Post</label>
-          <input type="hidden" class="form-control " name="deletePost" id="deletePostV" required><br>
+          <input type="hidden" class="form-control " name="deletePostValue" id="deletePostV" required><br>
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>">
       </div>
       <div class="modal-footer">
-        <button type="submit" class="btn cprimary" onclick="deletePost()" id="deleteButton">Delete</button>
+        <button type="submit" class="btn cprimary" onclick="deletePost()" id="deletePostButton">Delete</button>
         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
       </div>
     </form>
     </div>
   </div>
 </div> 
+
+<script>
+  CKEDITOR.replace('postBody');
+  CKEDITOR.replace('editpostBody');
+</script>

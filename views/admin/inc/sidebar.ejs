@@ -4,41 +4,45 @@
             <img src="../img/admin/lg.png" alt="">
             <h1>Madiora</h1>
         </div>
-        <i class="fa fa-times" id="sidebarIcon" onclick="closeSidebar()"></i>
+        <i class="fa fa-2x fa-times" id="sidebarIcon" onclick="closeSidebar()"></i>
     </div>
     <div class="sidebar__menu">
-        <div class="sidebar__link active_menu_link">
+        <div class="sidebar__link <%= path === '/admin/dashboard' ? 'active_menu_link' : '' %>">
             <i class="fa fa-home"></i>
             <a href="/admin/dashboard">Dashboard</a>
         </div>
         <h2>MNG</h2>
-        <div class="sidebar__link">
+        <div class="sidebar__link  <%= path === '/admin/posts' ? 'active_menu_link' : '' %>">
             <i class="fa fa-user-secret"></i>
             <a href="/admin/posts">Posts</a>
         </div>
     
-        <div class="sidebar__link">
+        <div class="sidebar__link  <%= path === '/admin/categories' ? 'active_menu_link' : '' %>">
             <i class="fa fa-archive"></i>
             <a href="/admin/categories">Categories</a>
         </div>
-        <div class="sidebar__link">
+        <!-- <div class="sidebar__link">
             <i class="fa fa-files-o"></i>
             <a href="#">Apply for Leave</a>
-        </div>
+        </div> -->
 
-        <h2>PAYROLL</h2>
-
-        <div class="sidebar__link">
-            <i class="fa fa-money"></i>
-            <a href="#">Payroll</a>
+        <h2>ADMIN</h2>
+       <%if(isAuthenticated && sessionUser.role =='admin') {%>
+        <div class="sidebar__link  <%= path === '/admin/users' ? 'active_menu_link' : '' %>">
+            <i class="fa fa-users"></i>
+            <a href="/admin/users">Users</a>
         </div>
-        <div class="sidebar__link">
+        <%}%>
+        <!-- <div class="sidebar__link">
             <i class="fa fa-briefcase"></i>
             <a href="#">Paygrade</a>
+        </div>-->
+        <form action="/admin/logout" method="post">
+         <div class="sidebar__link sidebar__logout">
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                <i class="fa fa-power-off"></i>
+                <button type="submit">Logout</button>
         </div>
-        <div class="sidebar__link sidebar__logout">
-            <i class="fa fa-power-off"></i>
-            <a href="#">Logout</a>
-        </div>
+    </form>
     </div>
 </div>
