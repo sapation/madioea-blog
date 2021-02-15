@@ -3,32 +3,36 @@
         <br>
         <div class="row">
             <div class="news-active">
-                <div class="col-md-4 col-sm-6 col-xs-12">
-                    <div class="latest-news-wrap" data-aos="fade-up" data-aos-duration="1000">
-                        <div class="news-img">
-                            <img src="img/1.jpg" class="img-responsive" alt="" srcset="">
-                            <div class="deat">
-                                <span>31</span>
-                                <span>Jan</span>
+                <% if( posts.length > 0){%>
+                    <% posts.forEach(post =>{%>
+                        <div class="col-md-4 col-sm-6 col-xs-12">
+                            <div class="latest-news-wrap" data-aos="fade-up" data-aos-duration="1000">
+                                <div class="news-img">
+                                    <img src="img/<%=post.postImage%>" class="img-responsive" alt="" srcset="">
+                                    <div class="deat">
+                                        <span>31</span>
+                                        <span>Jan</span>
+                                    </div>
+                                </div>
+                                <div class="news-content">
+                                    <i class="fa fa-facebook"></i>
+                                    <i class="fa fa-twitter"></i>
+                                    <i class="fa fa-whatsapp"></i>
+        
+                                    <p><%= post.postBody%></p> 
+                                    <br>
+        
+                                    <a href="">Read More</a>
+                                </div>
                             </div>
                         </div>
-                        <div class="news-content">
-                            <i class="fa fa-facebook"></i>
-                            <i class="fa fa-twitter"></i>
-                            <i class="fa fa-whatsapp"></i>
 
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum, sequi omnis natus eaque
-                                nobis qui aut molestias eum asperiores provident Lorem ipsum dolor sit amet consectetur
-                                adipisicing elit. Laborum, sequi omnis natus eaque nobis qui aut molestias eum asperiores
-                                provident.
-                            </p>
-                            <br>
-
-                            <a href="">Read More</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-6 col-xs-12">
+                        <%})%>
+                
+                <%}else{%>
+                    <h2>No post Available</h2>
+                <%}%>
+                <!-- <div class="col-md-4 col-sm-6 col-xs-12">
                     <div class="latest-news-wrap">
                         <div class="news-img">
                             <img src="img/2.jpg" class="img-responsive" alt="" srcset="">
@@ -153,7 +157,7 @@
                             <a href="">Read More</a>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>
