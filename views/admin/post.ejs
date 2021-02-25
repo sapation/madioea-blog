@@ -39,7 +39,7 @@
         </thead>
         <tbody>
           <% if(posts.length > 0){%>
-            <% posts.forEach((post)=>{%>
+            <% posts.reverse().forEach((post)=>{%>
              <% if(post.author == sessionUser.firstname){%>
              <tr>
               <td><img src="../img/<%= post.postImage%>" alt="" srcset="" width="30"></td>

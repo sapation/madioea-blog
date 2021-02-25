@@ -1,0 +1,9 @@
+.sidebar{
+    grid-row: 1/4;
+}
+
+.sidebar div > h2{
+    margin: 20px 0px;
+    font-size: 50px;
+    letter-spacing: 5px;
+}

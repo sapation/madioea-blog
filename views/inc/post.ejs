@@ -1,163 +1,129 @@
+<% if( posts.length > 0){%>
+
+<div class="cover">            
+        <% posts.reverse().forEach((post,count) =>{%>
+           <% if(count <= 3){%>
+            <div class="feature">
+                <img src="img/<%=post.postImage%>" alt="">
+                <div class="title__filter"></div>
+                <div class="feature__title">
+                    <div class="date">
+                        <div class="date_filter"></div>
+                        <h3>30
+                            <span>Jan</span>
+                        </h3>
+                    </div>
+                    <p>by
+                        <a href="#"><%=post.author%></a>
+                        <span></span><%=post.postCategory%>
+                        <span></span>
+                        <a href="#">213 Views</a>
+                    </p>
+                    <h1><%=post.postName%></h1>
+                </div>
+            </div>
+            <%} %>
+        
+
+    <%})%>
+                
+    <!-- <div class="feature">
+        <img src="img/f1.jpg" alt="">
+        <div class="title__filter"></div>
+        <div class="feature__title">
+            <div class="date">
+                <div class="date_filter"></div>
+                <h3>30
+                    <span>Jan</span>
+                </h3>
+            </div>
+            <p>by
+                <a href="#">Mandiora</a>
+                <span></span>Breakfast Meals
+                <span></span>
+                <a href="#">213 upvotes</a>
+            </p>
+            <h1>Baked Bacon with lemon Rosemary</h1>
+        </div>
+    </div>
+    <div class="feature">
+        <img src="img/f3.jpg" alt="">
+        <div class="title__filter"></div>
+        <div class="feature__title">
+            <div class="date">
+                <div class="date_filter"></div>
+                <h3>30
+                    <span>Jan</span>
+                </h3>
+            </div>
+            <p>by
+                <a href="#">Mandiora</a>
+                <span></span>Breakfast Meals
+                <span></span>
+                <a href="#">213 upvotes</a>
+            </p>
+            <h1>Baked Bacon with Salad </h1>
+        </div>
+    </div>
+     <div class="feature"> 
+        <img src="img/f2.jpg" alt="">
+        <div class="title__filter"></div>
+        <div class="feature__title">
+            <div class="date">
+                <div class="date_filter"></div>
+                <h3>30
+                    <span>Jan</span>
+                </h3>
+            </div>
+            <p>by
+                <a href="#">Mandiora</a>
+                <span></span>Breakfast Meals
+                <span></span>
+                <a href="#">213 upvotes</a>
+            </p>
+            <h1>Bacon with lemon Leave</h1>
+        </div>
+    </div> -->
+</div>
+
+
+
+
 <section class="latest-news-area" id="latest">
     <div class="container">
         <br>
         <div class="row">
-            <div class="news-active">
-                <% if( posts.length > 0){%>
-                    <% posts.forEach(post =>{%>
-                        <div class="col-md-4 col-sm-6 col-xs-12">
-                            <div class="latest-news-wrap" data-aos="fade-up" data-aos-duration="1000">
-                                <div class="news-img">
-                                    <img src="img/<%=post.postImage%>" class="img-responsive" alt="" srcset="">
-                                    <div class="deat">
-                                        <span>31</span>
-                                        <span>Jan</span>
+             <div class="news-active">
+                     <% posts.reverse().forEach((post, count) =>{%>
+                         <% if(count >=4){%>
+                            <div class="col-md-4 col-sm-6 col-xs-12">
+                                <div class="latest-news-wrap" data-aos="fade-up" data-aos-duration="1000">
+                                    <div class="news-img">
+                                        <img src="img/<%=post.postImage%>" class="img-responsive" alt="" srcset="">
+                                        <div class="deat">
+                                            <span>31</span>
+                                            <span>Jan</span>
+                                        </div>
+                                    </div>
+                                    <div class="news-content">
+                                        <i class="fa fa-facebook"></i>
+                                        <i class="fa fa-twitter"></i>
+                                        <i class="fa fa-whatsapp"></i>
+            
+                                        <p><%= post.postBody%></p> 
+                                        <br>
+            
+                                        <a href="">Read More</a>
                                     </div>
                                 </div>
-                                <div class="news-content">
-                                    <i class="fa fa-facebook"></i>
-                                    <i class="fa fa-twitter"></i>
-                                    <i class="fa fa-whatsapp"></i>
-        
-                                    <p><%= post.postBody%></p> 
-                                    <br>
-        
-                                    <a href="">Read More</a>
-                                </div>
                             </div>
-                        </div>
+                         <%}%>
 
                         <%})%>
-                
                 <%}else{%>
                     <h2>No post Available</h2>
                 <%}%>
-                <!-- <div class="col-md-4 col-sm-6 col-xs-12">
-                    <div class="latest-news-wrap">
-                        <div class="news-img">
-                            <img src="img/2.jpg" class="img-responsive" alt="" srcset="">
-                            <div class="deat">
-                                <span>31</span>
-                                <span>Jan</span>
-                            </div>
-                        </div>
-                        <div class="news-content">
-                            <i class="fa fa-facebook"></i>
-                            <i class="fa fa-twitter"></i>
-                            <i class="fa fa-whatsapp"></i>
-
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum, sequi omnis natus eaque
-                                nobis qui aut molestias eum asperiores provident Lorem ipsum dolor sit amet consectetur
-                                adipisicing elit. Laborum, sequi omnis natus eaque nobis qui aut molestias eum asperiores
-                                provident.
-                            </p>
-                            <br>
-
-                            <a href="">Read More</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-6 col-xs-12">
-                    <div class="latest-news-wrap">
-                        <div class="news-img">
-                            <img src="img/3.jpg" class="img-responsive" alt="" srcset="">
-                            <div class="deat">
-                                <span>31</span>
-                                <span>Jan</span>
-                            </div>
-                        </div>
-                        <div class="news-content">
-                            <i class="fa fa-facebook"></i>
-                            <i class="fa fa-twitter"></i>
-                            <i class="fa fa-whatsapp"></i>
-
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum, sequi omnis natus eaque
-                                nobis qui aut molestias eum asperiores provident Lorem ipsum dolor sit amet consectetur
-                                adipisicing elit. Laborum, sequi omnis natus eaque nobis qui aut molestias eum asperiores
-                                provident.
-                            </p>
-                            <br>
-
-                            <a href="">Read More</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-4 col-sm-6 col-xs-12">
-                    <div class="latest-news-wrap">
-                        <div class="news-img">
-                            <img src="img/3.jpg" class="img-responsive" alt="" srcset="">
-                            <div class="deat">
-                                <span>31</span>
-                                <span>Jan</span>
-                            </div>
-                        </div>
-                        <div class="news-content">
-                            <i class="fa fa-facebook"></i>
-                            <i class="fa fa-twitter"></i>
-                            <i class="fa fa-whatsapp"></i>
-
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum, sequi omnis natus eaque
-                                nobis qui aut molestias eum asperiores provident Lorem ipsum dolor sit amet consectetur
-                                adipisicing elit. Laborum, sequi omnis natus eaque nobis qui aut molestias eum asperiores
-                                provident.
-                            </p>
-                            <br>
-
-                            <a href="">Read More</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-6 col-xs-12">
-                    <div class="latest-news-wrap">
-                        <div class="news-img">
-                            <img src="img/3.jpg" class="img-responsive" alt="" srcset="">
-                            <div class="deat">
-                                <span>31</span>
-                                <span>Jan</span>
-                            </div>
-                        </div>
-                        <div class="news-content">
-                            <i class="fa fa-facebook"></i>
-                            <i class="fa fa-twitter"></i>
-                            <i class="fa fa-whatsapp"></i>
-
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum, sequi omnis natus eaque
-                                nobis qui aut molestias eum asperiores provident Lorem ipsum dolor sit amet consectetur
-                                adipisicing elit. Laborum, sequi omnis natus eaque nobis qui aut molestias eum asperiores
-                                provident.
-                            </p>
-                            <br>
-
-                            <a href="">Read More</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-6 col-xs-12">
-                    <div class="latest-news-wrap">
-                        <div class="news-img">
-                            <img src="img/3.jpg" class="img-responsive" alt="" srcset="">
-                            <div class="deat">
-                                <span>31</span>
-                                <span>Jan</span>
-                            </div>
-                        </div>
-                        <div class="news-content">
-                            <i class="fa fa-facebook"></i>
-                            <i class="fa fa-twitter"></i>
-                            <i class="fa fa-whatsapp"></i>
-
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum, sequi omnis natus eaque
-                                nobis qui aut molestias eum asperiores provident Lorem ipsum dolor sit amet consectetur
-                                adipisicing elit. Laborum, sequi omnis natus eaque nobis qui aut molestias eum asperiores
-                                provident.
-                            </p>
-                            <br>
-
-                            <a href="">Read More</a>
-                        </div>
-                    </div>
-                </div> -->
+               
             </div>
         </div>
     </div>

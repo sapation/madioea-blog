@@ -46,7 +46,7 @@
                                 </thead>
                                 <tbody>
                                   <% if(categories.length > 0){%>
-                                    <% categories.forEach((category)=>{%>
+                                    <% categories.reverse().forEach((category)=>{%>
                                   <tr>
                                     <td><input type="checkbox"></td>
                                     <td><%= category.category_name%></td>

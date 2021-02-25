@@ -38,7 +38,7 @@
           </thead>
           <tbody>
             <% if(users.length > 0){%>
-                <% users.forEach((user)=>{%>
+                <% users.reverse().forEach((user)=>{%>
             <tr>
                 <td><input type="checkbox"/></td>
                 <td><%=user.firstname%>  <%=user.lastname%></td>

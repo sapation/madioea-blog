@@ -22,3 +22,9 @@ exports.getContact = (req, res, next) => {
         title: 'Madiora-Contact'
     })
 }
+
+exports.getPost = (req, res, next) => {
+    res.render('post', {
+        title: 'Madiora-Contact'
+    })
+}
