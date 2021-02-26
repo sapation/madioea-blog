@@ -7,7 +7,7 @@ const config = require('./config')
 const csrf = require('csurf');
 
 const app = new express();
-const port = 5000;
+const port = process.env.PORT || 3000;
 const store = new MongoDBStore({
   uri: config.MONGODB_URL,
   collection:'session'
